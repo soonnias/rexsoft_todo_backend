@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import tasksRoutes from "./routes/tasks.js";
+import {swaggerSetup} from './swagger.js';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+swaggerSetup(app);
 
 app.use("/api/tasks", tasksRoutes);
 
