@@ -28,9 +28,14 @@ const router = express.Router();
  *                 $ref: '#/components/schemas/Task'
  */
 router.get("/", async (req, res) => {
-    const tasks = await Task.find();
-    res.json(tasks);
+    try {
+        const tasks = await Task.find().sort({ createdAt: -1 });
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch tasks' });
+    }
 });
+
 
 /**
  * @swagger
